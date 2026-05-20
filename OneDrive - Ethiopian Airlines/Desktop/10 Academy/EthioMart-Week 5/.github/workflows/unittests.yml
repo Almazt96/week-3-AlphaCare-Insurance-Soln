@@ -1,0 +1,43 @@
+# Workflow Name:
+    name: Run Unit Tests
+
+    # Trigger Events: Define when the workflow runs (e.g., on push, pull_request, etc.):
+    on:
+      push:
+        branches:
+          - main
+      pull_request:
+        branches:
+          - main
+    
+    # Job Configuration: Specify environments, dependencies, and testing commands:
+    
+    jobs:
+      test:
+        runs-on: ubuntu-24.04
+    
+        steps:
+        - name: Checkout Code
+          uses: actions/checkout@main
+    
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: 3.12.7  # Specify a valid Python version
+    
+        - name: Install Dependencies
+          run: |
+            pip install -r requirements.txt
+            pip install pytest
+    
+        - name: Run Unit Tests
+          run: pytest ./tests/test_store.py
+    
+    # Artifacts (Optional): Save test reports or coverage files:
+    
+        - name: Upload Test Results
+          uses: actions/upload-artifact@v3
+          with:
+            name: test-results
+            path: reports/
+    
