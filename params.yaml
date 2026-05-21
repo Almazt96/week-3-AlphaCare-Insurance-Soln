@@ -1,0 +1,7 @@
+prepare:
+  split_ratio: 0.2
+  seed: 42
+train:
+  epochs: 100
+  lr: 0.001
+  batch_size: 32
