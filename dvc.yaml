@@ -1,0 +1,39 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py --config params.yaml
+    deps:
+      - src/prepare.py
+      - data/MachineLearningRating_v3.zip
+    params:
+      - prepare.seed
+      - prepare.split_ratio
+    outs:
+      - data/prepared.csv
+      - data/test.csv
+
+  train:
+    cmd: python src/train.py --config params.yaml
+    deps:
+      - src/train.py
+      - data/prepared.csv
+    params:
+      - train.epochs
+      - train.lr
+      - train.batch_size
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py --config params.yaml
+    deps:
+      - src/evaluate.py
+      - data/prepared
+      - models/model.pkl
+    metrics:
+      - evaluation/metrics.json:
+          cache: false
+    plots:
+      - evaluation/plots/confusion_matrix.json:
+          cache: false
+          x: actual
+          y: predicted
