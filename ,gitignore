@@ -12,6 +12,9 @@ __pycache__/
 node_modules/
 # Ignore Python virtual environment folders
 data/
+*.csv
+data/test.csv
+data/prepared.csv
 venv/
 jupyter_env/
 OneDrive - Ethiopian Airlines/
