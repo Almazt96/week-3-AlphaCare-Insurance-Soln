@@ -29,7 +29,7 @@ def load_insurance_data(file_path: str) -> pd.DataFrame:
                 separator = '|' if '|' in first_line else (';' if ';' in first_line else ',')
                 
                 # Read directly from the compressed stream
-                df = pd.read_csv(z.open(target_internal_file), sep=separator)
+                df = pd.read_csv(z.open(target_internal_file), sep=separator, low_memory=False)
                 
         elif ext in ['.xlsx', '.xls']:
             df = pd.read_excel(file_path)
