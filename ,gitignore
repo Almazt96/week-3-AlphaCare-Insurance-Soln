@@ -1,0 +1,15 @@
+# Python files
+*.pyc
+__pycache__/
+
+# DVC
+.dvc/
+
+# Environment and build files
+.env
+.DS_Store
+node_modules/
+# Ignore Python virtual environment folders
+data/
+venv/
+jupyter_env/
