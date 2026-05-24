@@ -3,18 +3,32 @@
 !/data/*.dvc
 .dvc/
 
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Python caching
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Environment variables / Secrets
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
 # Python artifacts
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
-*.pyc
-
-# Environments
-.venv/
-venv/
-ENV/
-.env
 
 # OS/IDEs
 .DS_Store
@@ -30,3 +44,10 @@ data/
 data/test.csv
 data/prepared.csv
 jupyter_env/
+# DVC local cache (if it's inside the workspace)
+.dvc/cache/
+.dvc/tmp/
+
+# Or simply ignore entire local data copies if you prefer, but don't ignore the .dvc files!
+# data/**
+# !data/**/*.dvc
