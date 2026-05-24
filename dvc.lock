@@ -3,34 +3,34 @@ stages:
   prepare:
     cmd: python src/prepare.py --config params.yaml
     deps:
-    - path: data/MachineLearningRating_v3.zip
+    - path: data/raw/MachineLearningRating_v3.zip
       hash: md5
       md5: 8b89e33fc02624a98169f298012e535f
       size: 16611140
     - path: src/prepare.py
       hash: md5
-      md5: 1006639026b0cdfe95e33c459aced269
-      size: 2048
+      md5: 6aaa440dacb1109291658e22d47c8136
+      size: 2095
     params:
       params.yaml:
         prepare.seed: 42
         prepare.split_ratio: 0.2
     outs:
-    - path: data/prepared.csv
+    - path: data/processed/cleaned_insurance_data.csv
       hash: md5
-      md5: 90f2482d0cc7337fc4edc66f05faaf9e
-      size: 414733424
-    - path: data/test.csv
+      md5: 99db4d7b42d91318861078de3fedbb70
+      size: 421934126
+    - path: data/processed/test.csv
       hash: md5
-      md5: 5bbf9a62f5fe822570d5a4591055be4b
-      size: 103693999
+      md5: 245ae28f3ec8a40c07ba23f6cee8df64
+      size: 105494179
   train:
     cmd: python src/modeling.py --config params.yaml
     deps:
-    - path: data/prepared.csv
+    - path: data/processed/cleaned_insurance_data.csv
       hash: md5
-      md5: 90f2482d0cc7337fc4edc66f05faaf9e
-      size: 414733424
+      md5: 99db4d7b42d91318861078de3fedbb70
+      size: 421934126
     - path: src/modeling.py
       hash: md5
       md5: fe79ef058b65ea92866478bbfbbc2844
@@ -48,10 +48,10 @@ stages:
   evaluate:
     cmd: python src/modeling.py --config params.yaml
     deps:
-    - path: data/prepared.csv
+    - path: data/processed/cleaned_insurance_data.csv
       hash: md5
-      md5: 90f2482d0cc7337fc4edc66f05faaf9e
-      size: 414733424
+      md5: 99db4d7b42d91318861078de3fedbb70
+      size: 421934126
     - path: models/model.pkl
       hash: md5
       md5: 4ad71cefad4b5f5341ee06749d717085

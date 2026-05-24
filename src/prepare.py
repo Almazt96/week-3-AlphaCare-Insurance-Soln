@@ -26,9 +26,9 @@ def prepare_data():
     
     # 2. Define paths relative to the project root as well so they don't break
 
-    raw_data_path = os.path.join(project_root, "data", "MachineLearningRating_v3.zip") 
-    train_output_path = os.path.join(project_root, "data", "prepared.csv")
-    test_output_path = os.path.join(project_root, "data", "test.csv")
+    raw_data_path = os.path.join(project_root, "data", "raw", "MachineLearningRating_v3.zip") 
+    train_output_path = os.path.join(project_root, "data", "processed", "cleaned_insurance_data.csv")
+    test_output_path = os.path.join(project_root, "data", "processed", "test.csv")
        
     # 3. Load the raw data using your custom function
     df = data_loader.load_insurance_data(raw_data_path)
