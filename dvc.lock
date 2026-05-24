@@ -1,0 +1,71 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py --config params.yaml
+    deps:
+    - path: data/MachineLearningRating_v3.zip
+      hash: md5
+      md5: 8b89e33fc02624a98169f298012e535f
+      size: 16611140
+    - path: src/prepare.py
+      hash: md5
+      md5: 1006639026b0cdfe95e33c459aced269
+      size: 2048
+    params:
+      params.yaml:
+        prepare.seed: 42
+        prepare.split_ratio: 0.2
+    outs:
+    - path: data/prepared.csv
+      hash: md5
+      md5: 90f2482d0cc7337fc4edc66f05faaf9e
+      size: 414733424
+    - path: data/test.csv
+      hash: md5
+      md5: 5bbf9a62f5fe822570d5a4591055be4b
+      size: 103693999
+  train:
+    cmd: python src/modeling.py --config params.yaml
+    deps:
+    - path: data/prepared.csv
+      hash: md5
+      md5: 90f2482d0cc7337fc4edc66f05faaf9e
+      size: 414733424
+    - path: src/modeling.py
+      hash: md5
+      md5: fe79ef058b65ea92866478bbfbbc2844
+      size: 4616
+    params:
+      params.yaml:
+        train.batch_size: 32
+        train.epochs: 100
+        train.lr: 0.001
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 4ad71cefad4b5f5341ee06749d717085
+      size: 57
+  evaluate:
+    cmd: python src/modeling.py --config params.yaml
+    deps:
+    - path: data/prepared.csv
+      hash: md5
+      md5: 90f2482d0cc7337fc4edc66f05faaf9e
+      size: 414733424
+    - path: models/model.pkl
+      hash: md5
+      md5: 4ad71cefad4b5f5341ee06749d717085
+      size: 57
+    - path: src/modeling.py
+      hash: md5
+      md5: fe79ef058b65ea92866478bbfbbc2844
+      size: 4616
+    outs:
+    - path: evaluation/metrics.json
+      hash: md5
+      md5: 06c42079cec0cbfc8da997bff8516fed
+      size: 57
+    - path: evaluation/plots/confusion_matrix.json
+      hash: md5
+      md5: 4afaead1410703cf15e7e74bff245a40
+      size: 510

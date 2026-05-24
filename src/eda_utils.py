@@ -13,7 +13,6 @@ def plot_loss_ratio_by_dimension(df: pd.DataFrame, dimension: str, save_path: st
     """Generates a structured visualization mapping portfolio performance across risk elements."""
     plt.figure(figsize=(10, 5))
     grouped = df.groupby(dimension)['Loss_Ratio'].mean().reset_index().sort_values(by='Loss_Ratio', ascending=False)
-
     sns.barplot(data=grouped, x=dimension, y='Loss_Ratio', hue=dimension, palette='viridis', legend=False)
     plt.title(f'Average Loss Ratio distribution by {dimension}')
     plt.xticks(rotation=45)

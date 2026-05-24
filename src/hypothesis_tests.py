@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from scipy import stats
 
 # --- Define the Missing Statistical Test Functions ---
 

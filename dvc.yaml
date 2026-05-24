@@ -12,9 +12,9 @@ stages:
       - data/test.csv
 
   train:
-    cmd: python src/train.py --config params.yaml
+    cmd: python src/modeling.py --config params.yaml
     deps:
-      - src/train.py
+      - src/modeling.py
       - data/prepared.csv
     params:
       - train.epochs
@@ -24,10 +24,10 @@ stages:
       - models/model.pkl
 
   evaluate:
-    cmd: python src/evaluate.py --config params.yaml
+    cmd: python src/modeling.py --config params.yaml
     deps:
-      - src/evaluate.py
-      - data/prepared
+      - src/modeling.py
+      - data/prepared.csv
       - models/model.pkl
     metrics:
       - evaluation/metrics.json:

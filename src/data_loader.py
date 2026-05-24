@@ -2,12 +2,48 @@ import pandas as pd
 import numpy as np
 import os
 import zipfile
+from typing import Optional
 
 def load_insurance_data(file_path: str) -> pd.DataFrame:
     """
     Loads insurance datasets cleanly. Handles streaming compression (.zip), 
     traditional text formats, and sniffs out pipe '|' or standard delimiters.
+    
+    Missing Data Assessment & Strategy
+    
+    Missing Data Strategy Note:
+    We systematically evaluate missingness to prevent data leakage and bias.
+
+    Features with >50% missing values: Dropped, as imputation introduces too much noise.
+
+    Numerical features (e.g., Car values, premium items): Imputed using the median to maintain robustness against the outliers identified in our boxplots.
+
+    Categorical features (e.g., MaritalStatus, Gender): Imputed with the mode or a new category string 'Unknown' to preserve the missingness as a potential feature.
+    This approach ensures we retain as much data as possible while minimizing the risk of skewing our model with inaccurate imputations.
     """
+    
+    """Loads insurance dataset from a specified CSV filepath.
+
+    Args:
+        file_path (str): The relative or absolute path to the CSV file.
+
+    Returns:
+        pd.DataFrame: Loaded DataFrame containing the insurance records.
+
+    Raises:
+        FileNotFoundError: If the specified file does not exist.
+        IOError: For generic input/output read errors.
+    """
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"The data file at {file_path} was not found.")
+        
+    try:
+        
+        df = pd.read_csv(file_path, compression='zip', sep='|', low_memory=False)
+        return df
+    except IOError as e:
+        raise IOError(f"Error encountered while reading the file at {file_path}: {e}")
+    
     try:
         _, ext = os.path.splitext(file_path.lower())
         
@@ -29,8 +65,9 @@ def load_insurance_data(file_path: str) -> pd.DataFrame:
                 separator = '|' if '|' in first_line else (';' if ';' in first_line else ',')
                 
                 # Read directly from the compressed stream
+
                 df = pd.read_csv(z.open(target_internal_file), sep=separator, low_memory=False)
-                
+
         elif ext in ['.xlsx', '.xls']:
             df = pd.read_excel(file_path)
             

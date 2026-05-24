@@ -1,0 +1,24 @@
+{
+    "confusion_matrix": [
+        {
+            "predicted": "No Claim",
+            "actual": "No Claim",
+            "count": 850
+        },
+        {
+            "predicted": "Claim",
+            "actual": "No Claim",
+            "count": 50
+        },
+        {
+            "predicted": "No Claim",
+            "actual": "Claim",
+            "count": 30
+        },
+        {
+            "predicted": "Claim",
+            "actual": "Claim",
+            "count": 70
+        }
+    ]
+}

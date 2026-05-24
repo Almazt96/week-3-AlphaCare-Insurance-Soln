@@ -18,8 +18,7 @@ This repository is part of the Week 3 challenge for 10 Academy's Artificial Inte
 1. Clone the repository.
 2. Follow setup instructions in `setup.md`.
 
-Markdown
 ### Reproducing the Data Pipeline
 To fetch data records managed via DVC, execute:
-```bash
+
 dvc pull
