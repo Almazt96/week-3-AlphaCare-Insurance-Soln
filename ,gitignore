@@ -1,20 +1,32 @@
-OneDrive - Ethiopian Airlines/
-# Python files
-*.pyc
-__pycache__/
-
-# DVC
+# Data and DVC tracking
+/data/
+!/data/*.dvc
 .dvc/
 
-# Environment and build files
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.pyc
+
+# Environments
+.venv/
+venv/
+ENV/
 .env
+
+# OS/IDEs
 .DS_Store
+.vscode/
+.idea/
+
+OneDrive - Ethiopian Airlines/
 node_modules/
+
 # Ignore Python virtual environment folders
 data/
 *.csv
 data/test.csv
 data/prepared.csv
-venv/
 jupyter_env/
-OneDrive - Ethiopian Airlines/

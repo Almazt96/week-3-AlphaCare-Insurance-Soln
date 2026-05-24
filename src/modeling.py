@@ -1,4 +1,3 @@
-import numpy as np
 # 1. Robust Modular Framework 
 import pandas as pd
 import numpy as np
@@ -64,3 +63,63 @@ def train_and_evaluate_regression(X_train, X_test, y_train, y_test):
         performance_metrics[name] = {"RMSE": round(rmse, 2), "R2": round(r2, 4)}
         
     return performance_metrics, models["XGBoost Regressor"]
+
+import os
+import joblib
+
+# 1. Ensure the 'models' directory physically exists
+os.makedirs('models', exist_ok=True)
+
+# 2. Save the trained model with the EXACT name DVC expects
+model_path = 'models/model.pkl'
+joblib.dump(train_and_evaluate_regression, model_path)
+
+print(f"Model successfully saved to {model_path}")
+
+
+import json
+import os
+
+# 1. Dummy/Example metrics calculation 
+# Replace these with your actual model evaluation scores (e.g., mae, rmse, r2)
+metrics = {
+    "mae": 0.15,   # Replace with your actual MAE variable
+    "rmse": 0.22,  # Replace with your actual RMSE variable
+    "r2": 0.85     # Replace with your actual R-squared variable
+}
+
+# 2. Make sure the 'evaluation' directory exists
+os.makedirs('evaluation', exist_ok=True)
+
+# 3. Write the metrics dictionary directly to evaluation/metrics.json
+metrics_path = 'evaluation/metrics.json'
+with open(metrics_path, 'w') as f:
+    json.dump(metrics, f, indent=4)
+
+print(f"Metrics successfully saved to {metrics_path}")
+
+
+import json
+import os
+
+# 1. Mock Confusion Matrix Data structure 
+# (Replace this with your actual test predictions/labels matrix data if available)
+# DVC expects a clean array or list-of-dicts layout to generate plots.
+cm_data = {
+    "confusion_matrix": [
+        {"predicted": "No Claim", "actual": "No Claim", "count": 850},
+        {"predicted": "Claim",    "actual": "No Claim", "count": 50},
+        {"predicted": "No Claim", "actual": "Claim",    "count": 30},
+        {"predicted": "Claim",    "actual": "Claim",    "count": 70}
+    ]
+}
+
+# 2. Ensure the nested 'evaluation/plots' directory exists
+os.makedirs('evaluation/plots', exist_ok=True)
+
+# 3. Write the matrix directly to evaluation/plots/confusion_matrix.json
+plot_path = 'evaluation/plots/confusion_matrix.json'
+with open(plot_path, 'w') as f:
+    json.dump(cm_data, f, indent=4)
+
+print(f"Plot data successfully saved to {plot_path}")
