@@ -1,21 +1,30 @@
+# stages:
+#   clean_data:
+#     cmd: python src/prepare.py --input data/raw/MachineLearningRating_v3.zip --output data/processed/cleaned_insurance_data.csv
+#     deps:
+#       - data/raw/MachineLearningRating_v3.zip
+#       - src/prepare.py
+#     outs:
+#       - data/processed/cleaned_insurance_data.csv
+
 stages:
   prepare:
     cmd: python src/prepare.py --config params.yaml
     deps:
       - src/prepare.py
-      - data/MachineLearningRating_v3.zip
+      - data/raw/MachineLearningRating_v3.zip
     params:
       - prepare.seed
       - prepare.split_ratio
     outs:
-      - data/prepared.csv
-      - data/test.csv
+      - data/processed/cleaned_insurance_data.csv
+      - data/processed/test.csv
 
   train:
     cmd: python src/modeling.py --config params.yaml
     deps:
       - src/modeling.py
-      - data/prepared.csv
+      - data/processed/cleaned_insurance_data.csv
     params:
       - train.epochs
       - train.lr
@@ -27,7 +36,7 @@ stages:
     cmd: python src/modeling.py --config params.yaml
     deps:
       - src/modeling.py
-      - data/prepared.csv
+      - data/processed/cleaned_insurance_data.csv
       - models/model.pkl
     metrics:
       - evaluation/metrics.json:
