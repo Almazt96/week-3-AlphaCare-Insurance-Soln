@@ -57,7 +57,7 @@ dvc-objects==5.1.0
 dvc-render==1.0.2
 dvc-studio-client==0.21.0
 dvc-task==0.40.2
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
+# en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85
 entrypoints==0.4
 et_xmlfile==2.0.0
 executing==2.1.0
@@ -144,7 +144,7 @@ orjson==3.10.12
 packaging==24.2
 pandas==3.0.3
 pandas-datareader==0.10.0
-pandas_ta==0.3.14b0
+pandas_ta==0.3.14b
 pandocfilters==1.5.1
 parso==0.8.4
 pathspec==0.12.1
