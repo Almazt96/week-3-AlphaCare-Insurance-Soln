@@ -22,3 +22,14 @@ This repository is part of the Week 3 challenge for 10 Academy's Artificial Inte
 To fetch data records managed via DVC, execute:
 
 dvc pull
+
+## Getting Started & Collaboration Guide
+
+Follow these steps to set up your local development environment and reproduce the data pipeline.
+
+### 1. Environment Setup
+
+Clone the repository and navigate to the root directory:
+bash
+git clone <repository-url>
+cd <repository-name>
