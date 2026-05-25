@@ -1,3 +1,10 @@
+# Ignore the actual data files
+data/raw/MachineLearningRating_v3.zip
+
+# Anti-ignore (allow) the DVC tracking files
+!data/raw/*.dvc
+!data/**/*.dvc
+
 # Data directories (DVC will track these, Git should ignore them)
 data/
 *.csv
