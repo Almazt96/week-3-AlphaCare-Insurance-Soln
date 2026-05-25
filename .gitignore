@@ -1,0 +1,28 @@
+# Data directories (DVC will track these, Git should ignore them)
+data/
+*.csv
+*.xlsx
+*.parquet
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+
+# Environment variables / Secrets
+.env
+.env.*
+secrets.json
+
+# IDEs and OS-specific files
+.vscode/
+.idea/
+.DS_Store
